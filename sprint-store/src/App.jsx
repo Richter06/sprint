@@ -44,7 +44,7 @@ function Header({ cartCount, favoriteCount, onCart, onSearch, searchOpen, query,
   </>
 }
 
-function ProductCard({ product, isFavorite, onFavorite, onQuickView, onAdd }) {
+function ProductCard({ product, isFavorite, onFavorite, onQuickView }) {
   return <article className="product-card">
     <div className="product-card__media">
       <button className={'favorite-button ' + (isFavorite ? 'is-active' : '')} type="button" aria-label={(isFavorite ? 'Remover ' : 'Adicionar ') + product.name + ' dos favoritos'} aria-pressed={isFavorite} onClick={() => onFavorite(product.id)}><Icon name="heart" size={19} /></button>
@@ -80,8 +80,7 @@ function Hero({ selectedColor, setSelectedColor, onShop }) {
 
 function QuickView({ product, onClose, onAdd }) {
   const [size, setSize] = useState(40)
-  const [color, setColor] = useState('')
-  useEffect(() => { if (product) { setSize(40); setColor(product.colors?.[0] || '#d8d4cb') } }, [product])
+  const [color, setColor] = useState(product?.colors?.[0] || '#d8d4cb')
   useEffect(() => {
     if (!product) return undefined
     function onKeyDown(event) { if (event.key === 'Escape') onClose() }
@@ -217,7 +216,7 @@ function App() {
     </main>
     <Footer onHome={goHome} />
     <CartDrawer open={cartOpen} cart={cart} onClose={() => setCartOpen(false)} onQuantity={changeQuantity} onRemove={(key) => setCart((current) => current.filter((item) => item.key !== key))} onCheckout={() => { setCartOpen(false); showToast('Checkout demonstrativo — nenhuma compra foi realizada') }} />
-    <QuickView product={quickView} onClose={() => setQuickView(null)} onAdd={addToCart} />
+    <QuickView key={quickView?.id} product={quickView} onClose={() => setQuickView(null)} onAdd={addToCart} />
     <div className={'toast ' + (toast.visible ? 'is-visible' : '')} role="status" aria-live="polite"><span className="toast-check"><Icon name="check" size={16} /></span>{toast.message}</div>
     <div className="demo-ribbon"><span /> PROJETO DEMONSTRATIVO</div>
   </div>
