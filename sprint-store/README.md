@@ -1,16 +1,39 @@
-# React + Vite
+# SPRINT — loja conceito de tênis
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+E-commerce demonstrativo em React + Vite criado para o portfólio de soluções digitais da Rouxinol.
 
-Currently, two official plugins are available:
+## O que já está no projeto
+- Identidade visual premium/editorial em off-white, carvão, pedra e terracota.
+- Página inicial com lançamento, catálogo, categorias, manifesto e newsletter.
+- Busca textual, filtros, ordenação, favoritos, visualização rápida, escolha de cor e numeração.
+- Sacola lateral com quantidades, remoção, subtotal e persistência local no navegador.
+- Layout responsivo, estados vazios, feedbacks, navegação por teclado e respeito a movimento reduzido.
+- Produtos e preços fictícios. Nenhum pedido ou pagamento real é processado.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Rodar localmente
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+Validar build e lint:
+```bash
+npm run build
+npm run lint
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Próximas etapas
+1. Selecionar um modelo GLB com licença adequada, boa qualidade de materiais e tamanho otimizado.
+2. Integrar React Three Fiber / Three.js e criar o viewer 3D com quatro colorways reais, rotação e fallback acessível.
+3. Refinar rotas de catálogo e detalhes, imagens licenciadas/locais e testes em dispositivos modestos.
+4. Adicionar testes de interação e checagens de acessibilidade.
 
-## Expanding the ESLint configuration
+## Referências pesquisadas
+- Nike SNKRS — estudo de caso da Instrument: https://www.instrument.com/work/snkrs
+- React Three Fiber — documentação: https://r3f.docs.pmnd.rs/
+- React Three Fiber — performance: https://r3f.docs.pmnd.rs/advanced/scaling-performance
+- Configurador 3D com cores por material: https://github.com/gorhorvat/product-configurator-3d
+- VORI — case study de experiência e colorways: https://www.hirushgimhan.com/work/vori
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Imagens
+As fotografias dos produtos usam URLs remotas do Unsplash como conteúdo provisório de apresentação. Antes de uma publicação comercial, substituir por imagens e assets licenciados, preferencialmente locais e otimizados.
