@@ -17,6 +17,11 @@ export default function FavoritesDrawer({ open, favorites, onClose, onRemove, on
     if (!open) return undefined;
 
     const previousFocus = document.activeElement;
+    const backgroundElements = Array.from(document.querySelectorAll(
+      '.app-shell > .announcement, .app-shell > .site-header, .app-shell > main, .app-shell > footer'
+    ));
+    const previousInertStates = backgroundElements.map(element => [element, element.inert]);
+    backgroundElements.forEach(element => { element.inert = true; });
     closeButtonRef.current?.focus();
 
     function handleKeyDown(event) {
@@ -48,6 +53,7 @@ export default function FavoritesDrawer({ open, favorites, onClose, onRemove, on
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+      previousInertStates.forEach(([element, wasInert]) => { element.inert = wasInert; });
       if (previousFocus?.isConnected && !document.querySelector('.modal-backdrop')) {
         previousFocus.focus();
       }
