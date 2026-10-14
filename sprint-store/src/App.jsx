@@ -11,6 +11,7 @@ import Newsletter from './components/Newsletter.jsx';
 import Footer from './components/Footer.jsx';
 import QuickViewModal from './components/QuickViewModal.jsx';
 import CartDrawer from './components/CartDrawer.jsx';
+import FavoritesDrawer from './components/FavoritesDrawer.jsx';
 import Toast from './components/Toast.jsx';
 
 export default function App() {
@@ -38,12 +39,28 @@ export default function App() {
     try { return JSON.parse(localStorage.getItem('sprint-cart') || '[]'); }
     catch { return []; }
   });
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem('sprint-favorites') || '[]');
+      return Array.isArray(saved) ? saved.filter(id => products.some(product => product.id === id)) : [];
+    } catch {
+      return [];
+    }
+  });
   const [active, setActive] = useState(null);
   const [cartOpen, setCartOpen] = useState(false);
+  const [favoritesOpen, setFavoritesOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('Todos');
   const [toast, setToast] = useState('');
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('sprint-favorites', JSON.stringify(favorites));
+    } catch {
+      // Favoritos continuam funcionando durante a sessão se o armazenamento estiver indisponível.
+    }
+  }, [favorites]);
 
   const filtered = useMemo(() => products.filter(p =>
     (category === 'Todos' || p.category === category) &&
@@ -78,20 +95,49 @@ export default function App() {
   }
 
   function favorite(id) {
-    setFavorites(v => v.includes(id) ? v.filter(x => x !== id) : [...v, id]);
-    notify(favorites.includes(id) ? 'Removido dos favoritos' : 'Salvo nos favoritos');
+    const isSaved = favorites.includes(id);
+    setFavorites(current => current.includes(id)
+      ? current.filter(savedId => savedId !== id)
+      : [...current, id]);
+    notify(isSaved ? 'Removido dos favoritos' : 'Salvo nos favoritos');
   }
 
-  const count = cart.reduce((s, i) => s + i.quantity, 0);
+  function openCart() {
+    setFavoritesOpen(false);
+    setCartOpen(true);
+  }
+
+  function openFavorites() {
+    setCartOpen(false);
+    setFavoritesOpen(true);
+  }
 
   function explore() {
     document.getElementById('colecao')?.scrollIntoView({ behavior: 'smooth' });
   }
 
+  function exploreFromFavorites() {
+    setFavoritesOpen(false);
+    explore();
+  }
+
+  function openFavoriteProduct(product) {
+    setFavoritesOpen(false);
+    setActive(product);
+  }
+
+  const count = cart.reduce((s, i) => s + i.quantity, 0);
+  const favoriteProducts = products.filter(product => favorites.includes(product.id));
+
   return (
     <div className="app-shell">
       <div className="announcement">FRETE GRÁTIS A PARTIR DE R$ 399 <span>✳</span> DESIGN PARA SEGUIR EM MOVIMENTO</div>
-      <Header cartCount={count} favoriteCount={favorites.length} onCart={() => setCartOpen(true)} />
+      <Header
+        cartCount={count}
+        favoriteCount={favorites.length}
+        onCart={openCart}
+        onFavorites={openFavorites}
+      />
       <main>
         <Hero onExplore={explore} />
         <Benefits />
@@ -113,6 +159,14 @@ export default function App() {
       <Footer onHome={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
       {active && <QuickViewModal key={active.id} product={active} onClose={() => setActive(null)} onAdd={add} />}
       <CartDrawer open={cartOpen} cart={cart} onClose={() => setCartOpen(false)} onQuantity={quantity} onRemove={remove} />
+      <FavoritesDrawer
+        open={favoritesOpen}
+        favorites={favoriteProducts}
+        onClose={() => setFavoritesOpen(false)}
+        onRemove={favorite}
+        onQuickView={openFavoriteProduct}
+        onExplore={exploreFromFavorites}
+      />
       <Toast message={toast} />
     </div>
   );
