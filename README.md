@@ -339,19 +339,6 @@ Este repositório representa a interface e os comportamentos de demonstração, 
 - Não há suíte de testes automatizados configurada.
 - A licença e as permissões de redistribuição dos recursos visuais, especialmente do modelo GLB, devem ser confirmadas antes de uso comercial.
 
-## Checklist antes de publicar
-
-- [ ] Confirmar as licenças e permissões de todos os modelos 3D, imagens, ícones e fontes.
-- [ ] Substituir conteúdo fictício por catálogo, preços, descrições e fotografias autorizados.
-- [ ] Corrigir os metadados Open Graph/Twitter com domínio e imagem reais.
-- [ ] Configurar backend e persistência segura caso seja necessário receber pedidos ou guardar dados de clientes.
-- [ ] Integrar um provedor de pagamento e implementar validações no servidor antes de habilitar o checkout.
-- [ ] Ligar newsletter e formulários a um serviço real, com consentimento e política de privacidade adequados.
-- [ ] Validar todos os links e informações de entrega, devolução e contato.
-- [ ] Testar responsividade, acessibilidade, desempenho do modelo 3D e comportamento em dispositivos de menor capacidade.
-- [ ] Executar `npm run lint` e `npm run build` antes da publicação.
-- [ ] Configurar hospedagem, domínio, HTTPS e monitoramento conforme o destino.
-
 ---
 
 **Status:** protótipo de front-end funcional para demonstração de interface e interação. A experiência de catálogo, visualização rápida, sacola local e favoritos está implementada; as operações comerciais reais ainda precisam de infraestrutura própria.
