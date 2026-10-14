@@ -1,1 +1,37 @@
 .modal-backdrop{position:fixed;inset:0;z-index:30;background:#141412a8;display:grid;place-items:center;padding:22px;animation:fade-in .2s}.quick-modal{position:relative;width:min(850px,100%);max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;background:#f7f6f2}.modal-close{position:absolute;right:12px;top:10px;z-index:2;width:34px;height:34px;border:0;border-radius:50%;background:#f7f6f2;font-size:25px}.modal-image{min-height:420px;background:#e8e5dc}.modal-image img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply}.modal-content{padding:45px 32px 28px}.modal-content h2{font:500 35px Georgia,serif;margin:12px 0}.modal-content>strong{font-size:16px}.modal-content>p{font-size:12px;line-height:1.8;color:#77766f;margin:20px 0}.modal-option{margin:22px 0}.modal-option>b{display:flex;justify-content:space-between;font-size:11px;margin-bottom:12px}.modal-option small{color:#77766f;font-weight:400}.modal-option>div:not(.sizes){display:flex;gap:10px}.modal-option>div>button{width:22px;height:22px;border:2px solid #f7f6f2;border-radius:50%;outline:1px solid transparent}.modal-option>div>button.active{outline-color:#20201d}.modal-option .sizes{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}.modal-option .sizes button{height:35px;width:auto;border:1px solid #deddd5;border-radius:0;background:transparent;font-size:11px}.modal-option .sizes button.active{background:#20201d;color:white}.quick-modal .button img{display:block;width:15px;height:15px;filter:brightness(0) invert(1)}.quick-modal .button:hover img{filter:none}.demo-note{display:block;margin-top:13px;text-align:center;font-size:9px;color:#77766f}@keyframes fade-in{from{opacity:0}to{opacity:1}}@media(max-width:650px){.quick-modal{grid-template-columns:1fr}.modal-image{min-height:190px;max-height:230px}.modal-content{padding:24px 22px}.modal-content h2{font-size:29px}}
+
+.quick-modal {
+  animation: quick-modal-enter 340ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.modal-close {
+  transition: background-color 180ms ease, transform 220ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.modal-close:hover,
+.modal-close:focus-visible {
+  background: #e9e5dc;
+  transform: rotate(90deg);
+}
+
+.modal-option .sizes button {
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+.modal-option .sizes button:hover {
+  border-color: #20201d;
+}
+
+@keyframes quick-modal-enter {
+  from { opacity: 0; transform: translateY(12px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quick-modal,
+  .modal-close,
+  .modal-option .sizes button {
+    animation: none;
+    transition: none;
+  }
+}
