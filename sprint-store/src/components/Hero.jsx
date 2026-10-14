@@ -1,3 +1,4 @@
+import arrowIcon from '../assets/SVGlojas/square-arrow-out-up-right.svg'
 
 import { Suspense, useMemo, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
@@ -303,7 +304,7 @@ export default function Hero({ onExplore }) {
         </div>
 
         <button className="hero-cta" onClick={onExplore}>
-          Conheça o lançamento <span>↗</span>
+          Conheça o lançamento <span><img src={arrowIcon} alt="" aria-hidden="true" /></span>
         </button>
 
         <div className="hero-colors">
