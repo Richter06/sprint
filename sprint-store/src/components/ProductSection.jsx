@@ -14,7 +14,7 @@ export default function ProductSection({ products, categories, activeCategory, o
       </div>
 
       <div className="product-toolbar">
-        <div className="product-categories" aria-label="Filtrar por categoria">
+        <div className="product-categories" role="group" aria-label="Filtrar por categoria">
           {categories.map(c => (
             <button key={c} className={activeCategory === c ? 'active' : ''} onClick={() => onCategory(c)} aria-pressed={activeCategory === c}>
               {c}
