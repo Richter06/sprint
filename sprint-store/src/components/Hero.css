@@ -133,8 +133,20 @@
 }
 
 .hero-cta span {
-  font-size: 17px;
+  display: flex;
+  align-items: center;
   transition: transform 180ms ease;
+}
+
+.hero-cta span img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
+}
+
+.hero-cta:hover span img {
+  filter: none;
 }
 
 .hero-cta:hover {
