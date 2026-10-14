@@ -1,1 +1,16 @@
 .benefits{display:grid;grid-template-columns:repeat(3,1fr);padding:30px 7vw;border-bottom:1px solid #deddd5;gap:20px}.benefits article{display:flex;gap:16px;padding-right:18px;border-right:1px solid #deddd5}.benefits article:last-child{border:0}.benefits article>span{font:italic 16px Georgia,serif;color:#b96c4e}.benefits h3{font-size:12px;margin:0 0 7px}.benefits p{font-size:10px;color:#77766f;line-height:1.6;margin:0}@media(max-width:700px){.benefits{grid-template-columns:1fr;padding:12px 6vw}.benefits article{padding:16px 0;border-right:0;border-bottom:1px solid #deddd5}.benefits article:last-child{border:0}}
+
+.benefits article > span {
+  transition: color 220ms ease, transform 220ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.benefits article:hover > span {
+  color: #8f4f36;
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .benefits article > span {
+    transition: none;
+  }
+}
